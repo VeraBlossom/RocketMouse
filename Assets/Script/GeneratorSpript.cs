@@ -51,6 +51,6 @@ public class GeneratorSpript : MonoBehaviour
         float playerX = transform.position.x;
 
         //4
-        float removeRoomX = playerX
+        float removeRoomX = playerX;
     }
 }
