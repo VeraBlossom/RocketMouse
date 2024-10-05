@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GeneratorSpript : MonoBehaviour
 {
+    //cac phong cho san
     [SerializeField] private GameObject[] availableRooms;
+    //cac phong dang co tren man hinh hien tai
     [SerializeField] private List<GameObject> currentRooms;
     private float screenWidthInPoints;
 
@@ -36,21 +38,22 @@ public class GeneratorSpript : MonoBehaviour
 
         //5. Vi tri cua phong moi la vi tri trung tam da tim duoc
         room.transform.position = new Vector3(roomCenter,0,0);
-        //6
+
+        //6. Them phong moi vao trong cac phong hien tai tren man hinh
         currentRooms.Add(room);
     }
     private void GenerateRoomIfRequired()
     {
-        //1
+        //1. Tao danh sach cac phong can duoc loai bo
         List<GameObject> roomsToRemove = new List<GameObject>();
 
-        //2
+        //2. boolean kiem tra co can them phong moi khong
         bool addRooms = true;
 
-        //3
+        //3. Theo doi vi tri hien tai cua nhan vat theo chieu x
         float playerX = transform.position.x;
 
-        //4
+        //4. Vi tri ma sau cho do thi mot phong se
         float removeRoomX = playerX - screenWidthInPoints;
 
         //5
@@ -85,6 +88,13 @@ public class GeneratorSpript : MonoBehaviour
         foreach (var room in roomsToRemove)
         {
             currentRooms.Remove(room);
+            Destroy(room);
+        }
+
+        //12
+        if (addRooms)
+        {
+            AddRoom(farthestRoomEndX);
         }
         
     }
