@@ -51,6 +51,41 @@ public class GeneratorSpript : MonoBehaviour
         float playerX = transform.position.x;
 
         //4
-        float removeRoomX = playerX;
+        float removeRoomX = playerX - screenWidthInPoints;
+
+        //5
+        float addRoomX = playerX + screenWidthInPoints;
+
+        //6
+        float farthestRoomEndX = 0;
+        foreach (var room in currentRooms) {
+
+            //7
+            float roomWidth = room.transform.Find("floor").localScale.x;
+            float roomStartX = room.transform.position.x - (roomWidth * 0.5f);
+            float roomEndX = roomStartX + roomWidth;
+
+            //8
+            if (roomStartX > addRoomX)
+            {
+                addRooms = false;
+            }
+
+            //9
+            if (roomEndX < removeRoomX)
+            {
+                roomsToRemove.Add(room);
+            }
+
+            //10
+            farthestRoomEndX = Mathf.Max(farthestRoomEndX, roomEndX);
+        }
+
+        //11
+        foreach (var room in roomsToRemove)
+        {
+            currentRooms.Remove(room);
+        }
+        
     }
 }
